@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="tig">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>መኽዘን ንቕሓት - Checkout</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="checkout-container">
+        <h1>ምጥቃም ኣገልግሎት</h1>
+
+        <!-- Order Summary -->
+        <div class="order-summary">
+            <h2>ዝርዝር ትእዛዝ</h2>
+            <div id="orderItems"></div>
+            <div class="order-total">
+                <span>ጠቕላላ ዋጋ:</span>
+                <span id="orderTotal">$0.00</span>
+            </div>
+        </div>
+
+        <!-- Checkout Form -->
+        <form id="checkoutForm" class="checkout-form">
+            <!-- Personal Information -->
+            <section class="checkout-section">
+                <h3>ናትካ ሓበሬታ</h3>
+                <div class="form-group">
+                    <label for="firstName">ስም</label>
+                    <input type="text" id="firstName" required>
+                </div>
+                <div class="form-group">
+                    <label for="lastName">ስም ኣቦ</label>
+                    <input type="text" id="lastName" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">ኢሜይል</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">ቁጽሪ ስልኪ</label>
+                    <input type="tel" id="phone" required>
+                </div>
+            </section>
+
+            <!-- Shipping Information -->
+            <section class="checkout-section">
+                <h3>ኣድራሻ መላኺ</h3>
+                <div class="form-group">
+                    <label for="address">ኣድራሻ</label>
+                    <input type="text" id="address" required>
+                </div>
+                <div class="form-group">
+                    <label for="city">ከተማ</label>
+                    <input type="text" id="city" required>
+                </div>
+                <div class="form-group">
+                    <label for="state">ክፍለ ሃገር</label>
+                    <input type="text" id="state" required>
+                </div>
+                <div class="form-group">
+                    <label for="zipCode">ፖስታ ቁጽሪ</label>
+                    <input type="text" id="zipCode" required>
+                </div>
+            </section>
+
+            <!-- Shipping Method -->
+            <section class="checkout-section">
+                <h3>ዓይነት መጓዓዝያ</h3>
+                <div class="shipping-options">
+                    <div class="form-group">
+                        <input type="radio" id="standardShipping" name="shippingMethod" value="standard" checked>
+                        <label for="standardShipping">ልሙድ መጓዓዝያ (3-5 መዓልቲ) - $5.00</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="radio" id="expressShipping" name="shippingMethod" value="express">
+                        <label for="expressShipping">ቅልጡፍ መጓዓዝያ (1-2 መዓልቲ) - $15.00</label>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Payment Information -->
+            <section class="checkout-section">
+                <h3>ዓይነት ክፍሊት</h3>
+                <div class="payment-options">
+                    <div class="form-group">
+                        <input type="radio" id="creditCard" name="paymentMethod" value="credit" checked>
+                        <label for="creditCard">ክረዲት ካርድ</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="radio" id="paypal" name="paymentMethod" value="paypal">
+                        <label for="paypal">PayPal</label>
+                    </div>
+                </div>
+
+                <!-- Credit Card Details -->
+                <div id="creditCardDetails" class="payment-details">
+                    <div class="form-group">
+                        <label for="cardNumber">ቁጽሪ ካርድ</label>
+                        <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="expiryDate">ዕለት ምውዳእ</label>
+                            <input type="text" id="expiryDate" placeholder="MM/YY">
+                        </div>
+                        <div class="form-group">
+                            <label for="cvv">CVV</label>
+                            <input type="text" id="cvv" placeholder="123">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <button type="submit" class="checkout-btn">
+                <i class="fas fa-lock"></i> ክፈል
+            </button>
+        </form>
+    </div>
+
+    <script src="checkout.js"></script>
+</body>
+</html>

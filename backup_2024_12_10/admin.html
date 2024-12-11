@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="tig">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>መኽዘን ንቕሓት - Admin</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="admin-container">
+        <h1>መኽዘን ንቕሓት - Admin Panel</h1>
+        
+        <nav class="admin-nav">
+            <button class="nav-btn active" data-section="books">
+                <i class="fas fa-book"></i>
+                ምምሕዳር መጽሓፍቲ
+            </button>
+            <button class="nav-btn" data-section="blog">
+                <i class="fas fa-pen-fancy"></i>
+                ምምሕዳር ጽሑፋት
+            </button>
+        </nav>
+
+        <!-- Add Book Form -->
+        <div class="admin-section">
+            <h2>ምምሕዳር መጽሓፍቲ</h2>
+            <form id="addBookForm" class="admin-form">
+                <div class="form-group">
+                    <label for="title">ሽም መጽሓፍ:</label>
+                    <input type="text" id="title" name="title" required>
+                </div>
+                <div class="form-group">
+                    <label for="author">ደራሲ:</label>
+                    <input type="text" id="author" name="author" required>
+                </div>
+                <div class="form-group">
+                    <label for="price">ዋጋ ($):</label>
+                    <input type="number" id="price" name="price" step="0.01" min="0" required>
+                </div>
+                <div class="form-group">
+                    <label for="stock">ብዝሒ:</label>
+                    <input type="number" id="stock" name="stock" min="0" required>
+                </div>
+                <div class="form-group">
+                    <label for="rating">ደረጃ (1-5):</label>
+                    <input type="number" id="rating" name="rating" min="1" max="5" step="0.1" required>
+                </div>
+                <div class="form-group">
+                    <label for="category">ዓይነት መጽሓፍ:</label>
+                    <select id="category" name="category" required>
+                        <option value="ልብ-ወለድ">ልብ-ወለድ</option>
+                        <option value="ታሪኽ">ታሪኽ</option>
+                        <option value="ትምህርታዊ">ትምህርታዊ</option>
+                        <option value="ሃይማኖታዊ">ሃይማኖታዊ</option>
+                        <option value="ካልእ">ካልእ</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="description">መግለጺ:</label>
+                    <textarea id="description" name="description" rows="4"></textarea>
+                </div>
+                <div class="form-group image-upload-container">
+                    <label for="imageUpload">ምስሊ መጽሓፍ:</label>
+                    <div id="imagePreview" class="image-preview-area">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <p>ምስሊ ኣስሒብካ ኣብዚ ድርብዮ ወይ ጠውቕ</p>
+                        <input type="file" id="imageUpload" name="imageUpload" accept="image/*" style="display: none;">
+                    </div>
+                    <small class="image-hint">ዝተፈቕዱ ዓይነታት ምስሊ: JPG, PNG, GIF (ዝበለጸ ዓቐን: 5MB)</small>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-plus"></i> መጽሓፍ ወስኽ
+                    </button>
+                    <button type="reset" class="reset-btn">
+                        <i class="fas fa-undo"></i> ነጽፎ
+                    </button>
+                </div>
+            </form>
+
+            <div id="bookList" class="book-list">
+                <h3>ዝተወስኹ መጽሓፍቲ</h3>
+                <!-- Books will be displayed here -->
+            </div>
+        </div>
+
+        <!-- Blog Form -->
+        <div class="admin-section blog-section">
+            <h2>ምምሕዳር ጽሑፋት</h2>
+            <form id="blogForm" class="admin-form">
+                <div class="form-group">
+                    <label for="articleTitle">ርእሲ ጽሑፍ:</label>
+                    <input type="text" id="articleTitle" required>
+                </div>
+                <div class="form-group">
+                    <label for="articleDescription">ሓጺር መግለጺ:</label>
+                    <textarea id="articleDescription" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="articleImage">መንገዲ ስእሊ:</label>
+                    <input type="url" id="articleImage" required>
+                </div>
+                <div class="form-group">
+                    <label for="articleReadTime">ናይ ንባብ ግዜ (ብደቒቕ):</label>
+                    <input type="number" id="articleReadTime" required min="1">
+                </div>
+                <button type="submit" class="admin-button">ጽሑፍ ኣእቱ</button>
+            </form>
+
+            <div class="article-list">
+                <h3>ዝተዘርግሑ ጽሑፋት</h3>
+                <div id="articlesList"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="admin.js"></script>
+    <script src="admin-blog.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const navButtons = document.querySelectorAll('.nav-btn');
+            const sections = {
+                books: document.querySelector('.admin-section'),
+                blog: document.querySelector('.blog-section')
+            };
+
+            navButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Update active button
+                    navButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+
+                    // Show/hide sections
+                    const sectionName = button.dataset.section;
+                    Object.entries(sections).forEach(([name, section]) => {
+                        section.style.display = name === sectionName ? 'block' : 'none';
+                    });
+                });
+            });
+
+            // Initialize view
+            sections.blog.style.display = 'none';
+        });
+    </script>
+</body>
+</html>

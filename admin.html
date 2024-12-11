@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="tig">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>መኽዘን ንቕሓት - Admin</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="admin-container">
+        <h1>መኽዘን ንቕሓት - Admin Panel</h1>
+        
+        <nav class="admin-nav">
+            <button class="nav-btn active" data-section="bookManagement">
+                <i class="fas fa-book"></i>
+                ምምሕዳር መጽሓፍቲ
+            </button>
+            <button class="nav-btn" data-section="blogManagement">
+                <i class="fas fa-pen-fancy"></i>
+                ምምሕዳር ጽሑፋት
+            </button>
+        </nav>
+
+        <!-- Add Book Form -->
+        <div class="section" id="bookManagement">
+            <h2>ምምሕዳር መጽሓፍቲ</h2>
+            <form id="addBookForm" class="admin-form">
+                <div class="form-group">
+                    <label for="title">ሽም መጽሓፍ:</label>
+                    <input type="text" id="title" name="title" required>
+                </div>
+                <div class="form-group">
+                    <label for="author">ደራሲ:</label>
+                    <input type="text" id="author" name="author" required>
+                </div>
+                <div class="form-group">
+                    <label for="price">ዋጋ ($):</label>
+                    <input type="number" id="price" name="price" step="0.01" min="0" required>
+                </div>
+                <div class="form-group">
+                    <label for="category">ዓይነት መጽሓፍ:</label>
+                    <select id="category" name="category" required>
+                        <option value="">ምረጽ ዓይነት መጽሓፍ</option>
+                        <option value="fiction">ልቢ-ወለድ</option>
+                        <option value="history">ታሪኽ</option>
+                        <option value="educational">ትምህርታዊ</option>
+                        <option value="religion">ሃይማኖታዊ</option>
+                        <option value="children">ናይ ቆልዑ</option>
+                        <option value="poetry">ግጥሚ</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="tags">መለለዪታት (ብ ፊደል-ነቕጢ ዝተፈላለዩ):</label>
+                    <input type="text" id="tags" name="tags" placeholder="ንኣብነት: ሓዱሽ, ፍቱው, ቅዱስ">
+                </div>
+                <div class="form-group">
+                    <label for="stock">ብዝሒ:</label>
+                    <input type="number" id="stock" name="stock" min="0" required>
+                </div>
+                <div class="form-group">
+                    <label for="rating">ደረጃ (1-5):</label>
+                    <input type="number" id="rating" name="rating" min="1" max="5" step="0.1" required>
+                </div>
+                <div class="form-group">
+                    <label for="description">መግለጺ:</label>
+                    <textarea id="description" name="description" rows="4"></textarea>
+                </div>
+                <div class="form-group image-upload-container">
+                    <label for="imageUpload">ምስሊ መጽሓፍ:</label>
+                    <div id="imagePreview" class="image-preview-area">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <p>ምስሊ ኣስሒብካ ኣብዚ ድርብዮ ወይ ጠውቕ</p>
+                        <input type="file" id="imageUpload" name="imageUpload" accept="image/*" style="display: none;">
+                    </div>
+                    <small class="image-hint">ዝተፈቕዱ ዓይነታት ምስሊ: JPG, PNG, GIF (ዝበለጸ ዓቐን: 5MB)</small>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-plus"></i> መጽሓፍ ወስኽ
+                    </button>
+                    <button type="reset" class="reset-btn">
+                        <i class="fas fa-undo"></i> ነጽፎ
+                    </button>
+                </div>
+            </form>
+
+            <div id="bookList" class="book-list">
+                <h3>ዝተወስኹ መጽሓፍቲ</h3>
+                <!-- Books will be displayed here -->
+            </div>
+        </div>
+
+        <!-- Blog Form -->
+        <div class="section" id="blogManagement">
+            <h2>ምምሕዳር ጽሑፋት</h2>
+            <form id="blogForm" class="admin-form">
+                <div class="form-group">
+                    <label for="blogTitle">ርእሲ ጽሑፍ:</label>
+                    <input type="text" id="blogTitle" name="blogTitle" placeholder="ርእሲ ጽሑፍካ ኣብዚ ጽሓፍ" required>
+                </div>
+                <div class="form-group">
+                    <label for="blogAuthor">ደራሲ:</label>
+                    <input type="text" id="blogAuthor" name="blogAuthor" placeholder="ስምካ ኣብዚ ጽሓፍ" required>
+                </div>
+                <div class="form-group">
+                    <label for="blogContent">ትሕዝቶ ጽሑፍ:</label>
+                    <textarea id="blogContent" name="blogContent" rows="6" placeholder="ትሕዝቶ ጽሑፍካ ኣብዚ ጽሓፍ" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="readTime">ናይ ንባብ ግዜ (ብደቒቕ):</label>
+                    <input type="number" id="readTime" name="readTime" min="1" max="60" required>
+                </div>
+                <div class="form-group image-upload-container">
+                    <label for="blogImageUpload">ምስሊ ጽሑፍ:</label>
+                    <div id="blogImagePreview" class="image-preview-area">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <p>ምስሊ ኣስሒብካ ኣብዚ ድርብዮ ወይ ጠውቕ</p>
+                        <input type="file" id="blogImageUpload" name="blogImageUpload" accept="image/*" style="display: none;">
+                    </div>
+                    <small class="image-hint">ዝተፈቕዱ ዓይነታት ምስሊ: JPG, PNG, GIF (ዝበለጸ ዓቐን: 5MB)</small>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="submit-btn" id="submitBlog">
+                        <i class="fas fa-plus"></i> ጽሑፍ ወስኽ
+                    </button>
+                    <button type="reset" class="reset-btn" id="resetBlog">
+                        <i class="fas fa-undo"></i> ነጽፎ
+                    </button>
+                </div>
+            </form>
+
+            <div class="article-list">
+                <h3>ዝተዘርግሑ ጽሑፋት</h3>
+                <div id="articlesList"></div>
+                <div class="admin-actions">
+                    <button onclick="addArticle()" class="action-button">
+                        <i class="fas fa-plus"></i> ጽሑፍ ወስኽ
+                    </button>
+                    <button onclick="clearAllBlogs()" class="action-button delete-all">
+                        <i class="fas fa-trash-alt"></i> ኩሎም ጽሑፋት ሰርዝ
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="admin.js"></script>
+    <script>
+        // Navigation handling
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('.section');
+            const navLinks = document.querySelectorAll('.nav-btn');
+
+            function showSection(sectionId) {
+                sections.forEach(section => {
+                    section.style.display = 'none';
+                });
+                document.getElementById(sectionId).style.display = 'block';
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('data-section') === sectionId) {
+                        link.classList.add('active');
+                    }
+                });
+
+                // Save current section to localStorage
+                localStorage.setItem('currentSection', sectionId);
+            }
+
+            // Handle navigation clicks
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const sectionId = this.getAttribute('data-section');
+                    showSection(sectionId);
+                });
+            });
+
+            // Show last active section or default to books
+            const lastSection = localStorage.getItem('currentSection') || 'bookManagement';
+            showSection(lastSection);
+        });
+    </script>
+    <script src="admin-blog.js"></script>
+</body>
+</html>

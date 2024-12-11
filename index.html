@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="ti">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>መኽዘን ንቕሓት - Tigrinya Bookstore</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Abyssinica+SIL&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#home" class="logo">
+                <img src="./images/logo.png" alt="መኽዘን ንቕሓት" class="logo-image">
+                <span>መኽዘን ንቕሓት</span>
+            </a>
+            <div class="nav-links">
+                <a href="#home" class="nav-link active"><i class="fas fa-home"></i> መበገሲ</a>
+                <a href="#books" class="nav-link"><i class="fas fa-book"></i> መጻሕፍቲ</a>
+                <a href="#vlogs" class="nav-link"><i class="fas fa-video"></i> ቪዲዮታትን ጽሑፋትን</a>
+                <a href="#about" class="nav-link"><i class="fas fa-info-circle"></i> ብዛዕባና</a>
+                <a href="admin.html" class="nav-link admin-link"><i class="fas fa-user-shield"></i> Admin</a>
+            </div>
+            <div class="nav-actions">
+                <button class="login-btn"><i class="fas fa-user"></i> ኣባል ኩን</button>
+                <div class="cart-wrapper">
+                    <button type="button" class="cart-btn" onclick="toggleCart()">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">0</span>
+                    </button>
+                </div>
+                <button class="nav-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <header>
+        <!-- Existing header content -->
+    </header>
+
+    <div class="category-filter">
+        <label for="categoryFilter">ምረጽ ዓይነት መጽሓፍ:</label>
+        <select id="categoryFilter">
+            <option value="">ኩሎም</option>
+            <option value="fiction">ልቢ-ወለድ</option>
+            <option value="history">ታሪኽ</option>
+            <option value="educational">ትምህርታዊ</option>
+            <option value="religion">ሃይማኖታዊ</option>
+            <option value="children">ናይ ቆልዑ</option>
+            <option value="poetry">ግጥሚ</option>
+        </select>
+    </div>
+
+    <div class="tag-filter">
+        <label>መለለዪታት:</label>
+        <div id="activeTags" class="active-tags"></div>
+    </div>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="hero-overlay"></div>
+            <div class="hero-content" data-aos="fade-up" data-aos-duration="1000" data-aos-once="false">
+                <h1 class="hero-title">
+                    <span class="animate-text">ናብ</span>
+                    <span class="animate-text">መኽዘን</span>
+                    <span class="animate-text">ንቕሓት</span>
+                    <span class="animate-text">እንቋዕ</span>
+                    <span class="animate-text">ብደሓን</span>
+                    <span class="animate-text">መጻእኩም</span>
+                </h1>
+                <p class="hero-subtitle">ዝበለጸ ምርጫ ናይ ትግርኛ መጻሕፍቲ</p>
+                <div class="hero-buttons">
+                    <a href="#join" class="hero-btn primary-btn">
+                        <i class="fas fa-user-plus"></i>
+                        <span>ኣባል ኩን</span>
+                    </a>
+                    <a href="#books" class="hero-btn secondary-btn">
+                        <i class="fas fa-book-open"></i>
+                        <span>መጻሕፍቲ ርአ</span>
+                    </a>
+                </div>
+            </div>
+            <div class="scroll-indicator">
+                <div class="mouse">
+                    <div class="wheel"></div>
+                </div>
+                <div class="arrows">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </section>
+
+        <section id="books" class="books-section">
+            <h2 class="section-title" data-aos="fade-up">መጻሕፍቲ</h2>
+            <div class="search-container">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="book-search" placeholder="መጽሓፍ ድለ..." class="search-input">
+                </div>
+            </div>
+            <div class="book-grid" id="book-grid">
+                <!-- Books will be dynamically added here -->
+            </div>
+        </section>
+
+        <!-- Vlogs and Articles Section -->
+        <section id="vlogs" class="vlogs-section">
+            <h2 class="section-title">ቪዲዮታትን ጽሑፋትን</h2>
+            
+            <div class="main-content">
+                <section class="videos-section">
+                    <h2>ቪድዮታት</h2>
+                    <div class="content-grid">
+                        <!-- Video Card 1 -->
+                        <article class="content-card">
+                            <div class="content-thumbnail">
+                                <img src="https://images.unsplash.com/photo-1589829085413-56de8ae18c73?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="ታሪኽ ናይ መጽሓፍ">
+                                <div class="play-button">
+                                    <i class="fas fa-play"></i>
+                                </div>
+                            </div>
+                            <div class="content-text">
+                                <h3>ታሪኽ ናይ መጽሓፍ</h3>
+                                <p>ብዛዕባ ታሪኽ ናይ መጽሓፍ ምስ ደራሲ ዝተገብረ ቃለ መጠይቕ</p>
+                                <div class="content-meta">
+                                    <span><i class="fas fa-calendar"></i> 10/12/2024</span>
+                                    <span><i class="fas fa-eye"></i> 1.2K</span>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- Video Card 2 -->
+                        <article class="content-card">
+                            <div class="content-thumbnail">
+                                <img src="https://images.unsplash.com/photo-1532012197267-da84d127e765?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="ምስ ደራሲ">
+                                <div class="play-button">
+                                    <i class="fas fa-play"></i>
+                                </div>
+                            </div>
+                            <div class="content-text">
+                                <h3>ምስ ደራሲ</h3>
+                                <p>ምስ ፍሉይ ደራሲ ዝተገብረ ቃለ መጠይቕ</p>
+                                <div class="content-meta">
+                                    <span><i class="fas fa-calendar"></i> 09/12/2024</span>
+                                    <span><i class="fas fa-eye"></i> 856</span>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+                
+                <section class="articles-section">
+                    <h2>ጽሑፋት</h2>
+                    <div class="content-grid">
+                        <!-- Article Card 1 -->
+                        <article class="content-card">
+                            <div class="content-thumbnail">
+                                <img src="https://images.unsplash.com/photo-1457369804613-52c61a468e7d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="ታሪኽ ናይ ትግርኛ">
+                            </div>
+                            <div class="content-text">
+                                <h3>ታሪኽ ናይ ትግርኛ ጽሕፈት</h3>
+                                <p>ብዛዕባ ታሪኽ ናይ ትግርኛ ጽሕፈት ዝምልከት ሓጺር ጽሑፍ</p>
+                                <div class="content-meta">
+                                    <span><i class="fas fa-calendar"></i> 10/12/2024</span>
+                                    <span><i class="fas fa-user"></i> ዮናስ ተስፋይ</span>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- Article Card 2 -->
+                        <article class="content-card">
+                            <div class="content-thumbnail">
+                                <img src="https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="ሓዲሽ መጽሓፍቲ">
+                            </div>
+                            <div class="content-text">
+                                <h3>ሓዲሽ መጽሓፍቲ</h3>
+                                <p>ኣብ ዝሓለፈ ወርሒ ዝተሓትሙ ሓደስቲ መጻሕፍቲ</p>
+                                <div class="content-meta">
+                                    <span><i class="fas fa-calendar"></i> 09/12/2024</span>
+                                    <span><i class="fas fa-user"></i> ሳራ ገብረ</span>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+            </div>
+        </section>
+
+        <section id="about" class="about-section">
+            <div class="about-content" data-aos="fade-up">
+                <h2 class="section-title">ብዛዕባና</h2>
+                <p>መኽዘን ንቕሓት ናይ ትግርኛ መጻሕፍቲ መደብር እዩ። ዕላማና ንኹሎም ተገልገልትና ብዝቐለለ መንገዲ ናብ መጻሕፍቲ ክበጽሑ ምግባር እዩ።</p>
+            </div>
+        </section>
+    </main>
+
+
+    <!-- Blog Modal -->
+<div id="blogModal" class="modal">
+    <div class="modal-content">
+        <!-- Content will be dynamically added here -->
+    </div>
+</div>
+
+    <div class="cart-sidebar">
+        <div class="cart-header">
+            <h2>ዘንቢል</h2>
+            <button class="cart-close" onclick="toggleCart()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div id="cart-items" class="cart-items">
+            <!-- Cart items will be added here dynamically -->
+        </div>
+        <div class="cart-footer">
+            <div id="cart-total" class="cart-total">ጠቕላላ: $0.00</div>
+            <button class="checkout-btn">
+                <i class="fas fa-shopping-bag"></i>
+                ክፍሊት ፈጽም
+            </button>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>ናብ ኣካውንትኻ እቶ</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">ኢሜይል</label>
+                    <input type="email" id="loginEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">ፓስዎርድ</label>
+                    <input type="password" id="loginPassword" required>
+                </div>
+                <button type="submit" class="submit-btn">እቶ</button>
+            </form>
+            <p class="form-footer">
+                ኣካውንት የብልካን? <a href="#" id="registerLink">ኣባል ኩን</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>ኣባል ኩን</h2>
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="registerName">ሙሉእ ስም</label>
+                    <input type="text" id="registerName" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerEmail">ኢሜይል</label>
+                    <input type="email" id="registerEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerPassword">ፓስዎርድ</label>
+                    <input type="password" id="registerPassword" required>
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword">ፓስዎርድ ኣረጋግጽ</label>
+                    <input type="password" id="confirmPassword" required>
+                </div>
+                <button type="submit" class="submit-btn">ኣባል ኩን</button>
+            </form>
+            <p class="form-footer">
+                ኣካውንት ኣለካ? <a href="#" id="loginLink">እቶ</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- Notification Container -->
+    <div id="notification" class="notification"></div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>መኽዘን ንቕሓት</h3>
+                <p>ዝበለጸ ምርጫ ናይ ትግርኛ መጻሕፍቲ</p>
+            </div>
+            <div class="footer-section">
+                <h3>ርኸቡና</h3>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 መኽዘን ንቕሓት። ኩሎም መሰላት ዝተሓለዉ እዮም።</p>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
