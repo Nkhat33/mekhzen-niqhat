@@ -822,12 +822,12 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeCart();
 });
 
-// Listen for changes in localStorage
+// Add storage event listener to handle updates from other tabs/windows
 window.addEventListener('storage', function(e) {
     if (e.key === 'bookstore_books') {
-        console.log('Books updated in localStorage');
+        console.log('Books data updated in another tab/window');
+        window.books = JSON.parse(e.newValue) || [];
         displayBooks();
-        updateCartDisplay();
     }
 });
 
@@ -1190,3 +1190,12 @@ window.onclick = function(event) {
         closeBlogModal();
     }
 }
+
+// Listen for changes in localStorage
+window.addEventListener('storage', function(e) {
+    if (e.key === 'bookstore_books') {
+        console.log('Books updated in localStorage');
+        displayBooks();
+        updateCartDisplay();
+    }
+});
